@@ -5,6 +5,8 @@ import store from './store'
 
 import '@/assets/css/tailwind.css'
 
+import '@/plugins/vee-validate'
+
 Vue.config.productionTip = false
 
 new Vue({
