@@ -7,6 +7,8 @@ import '@/assets/css/tailwind.css'
 
 import '@/plugins/vee-validate'
 
+import '@/plugins/axios'
+
 Vue.config.productionTip = false
 
 new Vue({
