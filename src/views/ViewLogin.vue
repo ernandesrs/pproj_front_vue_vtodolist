@@ -6,7 +6,7 @@
       <input v-model="email" type="text" placeholder="Digite seu email"
         class="bg-gray-900 placeholder-gray-700 text-gray-500 font-normal border border-gray-900 text-center py-2 focus:outline-none focus:border-gray-700">
 
-      <input v-model="password" type="text" placeholder="Digite sua senha"
+      <input v-model="password" type="password" placeholder="Digite sua senha"
         class="bg-gray-900 placeholder-gray-700 text-gray-500 font-normal border border-gray-900 text-center py-2 focus:outline-none focus:border-gray-700">
 
       <button @click.stop.prevent="login()"
@@ -25,6 +25,7 @@
 
 <script>
 import LoginMenu from '@/components/auth/LoginMenu';
+import Cookie from 'js-cookie';
 
 export default {
   name: 'ViewLogin',
@@ -46,7 +47,10 @@ export default {
       };
 
       this.$axios.post('v1/login', payload).then((response) => {
-        console.log(response);
+        const token = `${response.data.token_type} ${response.data.access_token}`;
+        const expires = new Date(new Date().getTime() + 60 * 60 * 1000);
+
+        Cookie.set('_todolist_token', token, { expires: expires });
       });
     },
   }
