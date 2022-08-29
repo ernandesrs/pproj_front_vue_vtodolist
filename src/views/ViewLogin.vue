@@ -2,35 +2,54 @@
   <div class="min-w-max" style="height: 300px;">
     <LoginMenu />
 
-    <div class="grid gap-2">
-      <input v-model="email" type="text" placeholder="Digite seu email"
-        class="bg-gray-900 placeholder-gray-700 text-gray-500 font-normal border border-gray-900 text-center py-2 focus:outline-none focus:border-gray-700">
+    <ValidationObserver ref="loginForm" tag="form" @submit.stop.prevent="login">
+      <div class="grid gap-2">
+        <ValidationProvider v-slot="{ errors }" rules="required|email" name="E-mail">
+          <div class="flex flex-col">
+            <input v-model="email" type="text" placeholder="Digite seu email"
+              class="bg-gray-900 placeholder-gray-700 text-gray-500 font-normal border border-gray-900 text-center py-2 focus:outline-none focus:border-gray-700">
+            <div v-if="!!errors[0]" class="py-1 text-red-500 text-xs font-normal mb-2">{{
+                errors[0]
+            }}
+            </div>
+          </div>
+        </ValidationProvider>
 
-      <input v-model="password" type="password" placeholder="Digite sua senha"
-        class="bg-gray-900 placeholder-gray-700 text-gray-500 font-normal border border-gray-900 text-center py-2 focus:outline-none focus:border-gray-700">
+        <ValidationProvider v-slot="{ errors }" rules="required|string" name="Senha">
+          <div class="flex flex-col">
+            <input v-model="password" type="password" placeholder="Digite sua senha"
+              class="bg-gray-900 placeholder-gray-700 text-gray-500 font-normal border border-gray-900 text-center py-2 focus:outline-none focus:border-gray-700">
+            <div v-if="!!errors[0]" class="py-1 text-red-500 text-xs font-normal mb-2">{{
+                errors[0]
+            }}
+            </div>
+          </div>
+        </ValidationProvider>
 
-      <button @click.stop.prevent="login()"
-        class="block bg-blue-900 hover:bg-blue-800 py-2 text-gray-400 hover:text-gray-100 text-xs">
-        ENTRAR
-      </button>
+        <button type="submit"
+          class="block bg-blue-900 hover:bg-blue-800 py-2 text-gray-400 hover:text-gray-100 text-xs">
+          ENTRAR
+        </button>
 
-      <div class="text-center py-2">
-        <router-link to="/login">
-          Esquecia a senha
-        </router-link>
+        <div class="text-center py-2">
+          <router-link to="/login">
+            Esquecia a senha
+          </router-link>
+        </div>
       </div>
-    </div>
+    </ValidationObserver>
   </div>
 </template>
 
 <script>
 import LoginMenu from '@/components/auth/LoginMenu';
 import Cookie from 'js-cookie';
+import { ValidationObserver, ValidationProvider } from 'vee-validate';
 
 export default {
   name: 'ViewLogin',
 
-  components: { LoginMenu },
+  components: { LoginMenu, ValidationObserver, ValidationProvider },
 
   data() {
     return {
@@ -40,7 +59,13 @@ export default {
   },
 
   methods: {
-    login() {
+    async login() {
+      // validate with vee-validate
+      const validator = await this.$refs.loginForm.validate();
+
+      if (!validator)
+        return;
+
       const payload = {
         email: this.email,
         password: this.password
