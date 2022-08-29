@@ -1,7 +1,21 @@
 @tailwind base;
 
 a {
-    @apply text-gray-500;
+    @apply text-gray-600;
+}
+
+nav {
+    padding: 30px;
+}
+
+nav a {
+    @apply font-normal;
+    @apply text-gray-600 py-2;
+}
+
+nav a.router-link-exact-active {
+    @apply text-gray-400;
+    @apply border-b-2 border-b-blue-900;
 }
 
 @tailwind components;
