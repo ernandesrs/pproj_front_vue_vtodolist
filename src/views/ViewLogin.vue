@@ -51,6 +51,8 @@ export default {
         const expires = new Date(new Date().getTime() + 60 * 60 * 1000);
 
         Cookie.set('_todolist_token', token, { expires: expires });
+
+        this.$store.commit('user/STORE_USER', response.data.data);
       });
     },
   }

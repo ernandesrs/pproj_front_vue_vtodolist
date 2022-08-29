@@ -1,9 +1,9 @@
 export default {
     namespaced: true,
 
-    state: () => {
-        // user: { }
-    },
+    state: () => ({
+        user: {},
+    }),
 
     mutations: {
         /**
