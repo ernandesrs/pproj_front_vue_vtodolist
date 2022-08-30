@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import ViewLogin from '@/views/ViewLogin'
 import ViewRegister from '@/views/ViewRegister'
+import ForgotPasswordView from '@/views/ForgotPasswordView'
 import LayoutAuth from '@/layouts/LayoutAuth'
 
 Vue.use(VueRouter)
@@ -20,13 +21,24 @@ const routes = [
     ],
   },
   {
-    path: '/register',
+    path: '/registrar',
     component: LayoutAuth,
     children: [
       {
         path: '',
         name: 'register',
         component: ViewRegister
+      }
+    ]
+  },
+  {
+    path: '/esqueci-senha',
+    component: LayoutAuth,
+    children: [
+      {
+        path: '',
+        name: 'forgotPassword',
+        component: ForgotPasswordView
       }
     ]
   }

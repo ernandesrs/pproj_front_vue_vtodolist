@@ -41,7 +41,7 @@
         </button>
 
         <div class="text-center py-2">
-          <router-link to="/login">
+          <router-link to="/esqueci-senha">
             Esquecia a senha
           </router-link>
         </div>
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+
 import LoginMenu from '@/components/auth/LoginMenu';
 import Cookie from 'js-cookie';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
