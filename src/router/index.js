@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import ViewLogin from '@/views/ViewLogin'
 import ViewRegister from '@/views/ViewRegister'
 import ForgotPasswordView from '@/views/ForgotPasswordView'
+import ResetPasswordView from '@/views/ResetPasswordView'
 import LayoutAuth from '@/layouts/LayoutAuth'
 
 Vue.use(VueRouter)
@@ -39,6 +40,17 @@ const routes = [
         path: '',
         name: 'forgotPassword',
         component: ForgotPasswordView
+      }
+    ]
+  },
+  {
+    path: '/recuperar-senha',
+    component: LayoutAuth,
+    children: [
+      {
+        path: '',
+        name: 'resetPassword',
+        component: ResetPasswordView
       }
     ]
   }
