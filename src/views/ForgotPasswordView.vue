@@ -75,19 +75,37 @@ export default {
                 return;
             }
 
+            this.resetResponse();
+
             const payload = {
                 email: this.email,
             }
 
+            this.spinner.forgot_password = true;
+
             this.$axios.post("v1/forgot-password", payload).then(() => {
                 this.response.color = 'green';
                 this.response.message = 'Enviamos um email com instruções de recuperação :D!';
+
+                this.resetForm();
             }).catch((e) => {
                 const errorCode = e?.response?.data?.error || 'ServerError';
                 this.response.color = 'red';
                 this.response.message = messages[errorCode];
+            }).finally(() => {
+                this.spinner.forgot_password = false;
             });
-        }
+        },
+
+        resetResponse() {
+            this.response.color = '';
+            this.response.message = '';
+        },
+
+        resetForm() {
+            this.$refs.forgotPasswordForm.reset();
+            this.email = '';
+        },
     },
 }
 </script>
