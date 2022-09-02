@@ -9,6 +9,8 @@ import ResetPasswordView from '@/views/ResetPasswordView'
 import LayoutAuth from '@/layouts/LayoutAuth'
 import LayoutDefault from '@/layouts/LayoutDefault'
 
+import Guard from '@/service/middleware';
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,6 +22,7 @@ const routes = [
   },
   {
     path: '/login', component: LayoutAuth,
+    beforeEnter: Guard.redirectIfAuthenticated,
     children: [
       { path: '', name: 'login', component: ViewLogin }
     ],
