@@ -1,6 +1,6 @@
 <template>
     <header class="flex justify-between items-center px-5 bg-gray-900 text-gray-400">
-        <h1 class="py-5 py-5 font-bold text-lg uppercase">
+        <h1 class="py-5 font-bold text-lg uppercase">
             Todo List
         </h1>
 
