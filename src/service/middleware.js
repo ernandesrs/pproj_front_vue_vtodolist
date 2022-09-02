@@ -8,6 +8,7 @@
  */
 
 import Cookie from '@/service/cookie';
+import axios from 'axios';
 
 export default {
     /**
@@ -46,6 +47,11 @@ export default {
         if (!token) {
             route = { name: 'login' };
         }
+
+        axios.get("v1/me").catch(() => {
+            Cookie.deleteToken();
+            route = { name: 'login' };
+        });
 
         // redireciona para rota definida
         next(route);
