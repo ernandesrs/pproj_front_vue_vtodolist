@@ -2,56 +2,44 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import ViewLogin from '@/views/ViewLogin'
+import HomeView from '@/views/HomeView'
 import ViewRegister from '@/views/ViewRegister'
 import ForgotPasswordView from '@/views/ForgotPasswordView'
 import ResetPasswordView from '@/views/ResetPasswordView'
 import LayoutAuth from '@/layouts/LayoutAuth'
+import LayoutDefault from '@/layouts/LayoutDefault'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/login',
-    component: LayoutAuth,
+    path: '/', component: LayoutDefault,
     children: [
-      {
-        path: '',
-        name: 'login',
-        component: ViewLogin
-      }
+      { path: '', name: 'index', component: HomeView }
     ],
   },
   {
-    path: '/registrar',
-    component: LayoutAuth,
+    path: '/login', component: LayoutAuth,
     children: [
-      {
-        path: '',
-        name: 'register',
-        component: ViewRegister
-      }
+      { path: '', name: 'login', component: ViewLogin }
+    ],
+  },
+  {
+    path: '/registrar', component: LayoutAuth,
+    children: [
+      { path: '', name: 'register', component: ViewRegister }
     ]
   },
   {
-    path: '/esqueci-senha',
-    component: LayoutAuth,
+    path: '/esqueci-senha', component: LayoutAuth,
     children: [
-      {
-        path: '',
-        name: 'forgotPassword',
-        component: ForgotPasswordView
-      }
+      { path: '', name: 'forgotPassword', component: ForgotPasswordView }
     ]
   },
   {
-    path: '/recuperar-senha',
-    component: LayoutAuth,
+    path: '/recuperar-senha', component: LayoutAuth,
     children: [
-      {
-        path: '',
-        name: 'resetPassword',
-        component: ResetPasswordView
-      }
+      { path: '', name: 'resetPassword', component: ResetPasswordView }
     ]
   }
 ]
