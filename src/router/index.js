@@ -22,6 +22,7 @@ const routes = [
   },
   {
     path: '/login', component: LayoutAuth,
+    // executa esta função ao acessar esta rota 
     beforeEnter: Guard.redirectIfAuthenticated,
     children: [
       { path: '', name: 'login', component: ViewLogin }
