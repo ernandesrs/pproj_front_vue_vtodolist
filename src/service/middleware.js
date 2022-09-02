@@ -9,6 +9,7 @@
 
 import Cookie from '@/service/cookie';
 import axios from 'axios';
+import store from '@/store';
 
 export default {
     /**
@@ -40,7 +41,7 @@ export default {
      * @param {*} from 
      * @param {*} next 
      */
-    redirectIfUnauthenticated(to, from, next) {
+    async redirectIfUnauthenticated(to, from, next) {
         const token = Cookie.getToken();
         let route;
 
@@ -48,7 +49,11 @@ export default {
             route = { name: 'login' };
         }
 
-        axios.get("v1/me").catch(() => {
+        await axios.get("v1/me").then((response) => {
+            if (store?.state?.user?.id) {
+                store.commit('user/STORE_USER', response.data.data);
+            }
+        }).catch(() => {
             Cookie.deleteToken();
             route = { name: 'login' };
         });
