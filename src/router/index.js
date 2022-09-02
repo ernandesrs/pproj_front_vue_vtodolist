@@ -30,12 +30,16 @@ const routes = [
   },
   {
     path: '/registrar', component: LayoutAuth,
+    // executa esta função ao acessar esta rota 
+    beforeEnter: Guard.redirectIfAuthenticated,
     children: [
       { path: '', name: 'register', component: ViewRegister }
     ]
   },
   {
     path: '/esqueci-senha', component: LayoutAuth,
+    // executa esta função ao acessar esta rota 
+    beforeEnter: Guard.redirectIfAuthenticated,
     children: [
       { path: '', name: 'forgotPassword', component: ForgotPasswordView }
     ]
