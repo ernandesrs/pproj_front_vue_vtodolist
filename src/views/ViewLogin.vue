@@ -53,7 +53,7 @@
 <script>
 
 import LoginMenu from '@/components/auth/LoginMenu';
-import Cookie from 'js-cookie';
+import Cookie from '@/service/cookie';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import message from '@/utils/messages';
 
@@ -100,9 +100,8 @@ export default {
 
       this.$axios.post('v1/login', payload).then((response) => {
         const token = `${response.data.token_type} ${response.data.access_token}`;
-        const expires = new Date(new Date().getTime() + 60 * 60 * 1000);
 
-        Cookie.set('_todolist_token', token, { expires: expires });
+        Cookie.setToken(token);
 
         this.$store.commit('user/STORE_USER', response.data.data);
       }).catch((e) => {

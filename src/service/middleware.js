@@ -7,7 +7,7 @@
  * 
  */
 
-import Cookie from 'js-cookie';
+import Cookie from '@/service/cookie';
 
 export default {
     /**
@@ -20,7 +20,7 @@ export default {
      * @param {*} next 
      */
     redirectIfAuthenticated(to, from, next) {
-        const token = Cookie.get("_todolist_token");
+        const token = Cookie.getToken();
         let route;
 
         if (token) {
@@ -40,7 +40,7 @@ export default {
      * @param {*} next 
      */
     redirectIfUnauthenticated(to, from, next) {
-        const token = Cookie.get("_todolist_token");
+        const token = Cookie.getToken();
         let route;
 
         if (!token) {
