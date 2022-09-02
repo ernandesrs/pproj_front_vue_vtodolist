@@ -16,6 +16,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/', component: LayoutDefault,
+    // executa esta função ao acessar esta rota 
+    beforeEnter: Guard.redirectIfUnauthenticated,
     children: [
       { path: '', name: 'index', component: HomeView }
     ],

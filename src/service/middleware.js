@@ -21,13 +21,33 @@ export default {
      */
     redirectIfAuthenticated(to, from, next) {
         const token = Cookie.get("_todolist_token");
+        let route;
 
         if (token) {
-            // redireciona para nova rota
-            next({ name: 'index' });
+            route = { name: 'index' };
         }
 
-        // mantem rota atual
-        next(); 
+        // redireciona para rota definida
+        next(route);
     },
+
+    /**
+     * Realiza o redirecionamento do usuário para login(rota login)
+     * caso não haja no cookie um token de autenticação e o usuário esteja acessando
+     * uma view para usuários logados.
+     * @param {*} to 
+     * @param {*} from 
+     * @param {*} next 
+     */
+    redirectIfUnauthenticated(to, from, next) {
+        const token = Cookie.get("_todolist_token");
+        let route;
+
+        if (!token) {
+            route = { name: 'login' };
+        }
+
+        // redireciona para rota definida
+        next(route);
+    }
 };
