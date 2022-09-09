@@ -5,7 +5,7 @@
         </h1>
 
         <div>
-            <router-link class="px-4 py-2" to="">
+            <router-link class="px-4 py-2" :to="{name: 'profile'}">
                 Perfil
             </router-link>
             <router-link class="text-red-800 px-4 py-2" :to="{ name: 'logout' }">

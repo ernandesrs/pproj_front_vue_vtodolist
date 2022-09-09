@@ -50,7 +50,7 @@ export default {
         }
 
         await axios.get("v1/me").then((response) => {
-            if (store?.state?.user?.id) {
+            if (!store?.state?.user?.id) {
                 store.commit('user/STORE_USER', response.data.data);
             }
         }).catch(() => {

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import ViewLogin from '@/views/ViewLogin'
 import HomeView from '@/views/HomeView'
+import ProfileView from '@/views/ProfileView'
 import ViewRegister from '@/views/ViewRegister'
 import ForgotPasswordView from '@/views/ForgotPasswordView'
 import ResetPasswordView from '@/views/ResetPasswordView'
@@ -19,7 +20,8 @@ const routes = [
     // executa esta função ao acessar esta rota 
     beforeEnter: Guard.redirectIfUnauthenticated,
     children: [
-      { path: '', name: 'index', component: HomeView }
+      { path: '', name: 'index', component: HomeView },
+      { path: 'perfil', name: 'profile', component: ProfileView }
     ],
   },
   {
